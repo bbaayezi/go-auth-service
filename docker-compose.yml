@@ -1,0 +1,12 @@
+version: "2"
+
+services: 
+    app:
+        image: golang
+        volumes: 
+            - .:/go/src/go-auth-service
+        working_dir: /go/src/go-auth-service
+        # command: go mod download # download dependency
+        command: go run main.go # for debugging
+        ports: 
+            - 8080:8080
