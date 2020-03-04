@@ -2,12 +2,27 @@ package main
 
 import (
 	"fmt"
+	"go-auth-service/httpd/handlers"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v7"
 )
 
 func main() {
+	// connecting to redis
+	client := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+	pong, err := client.Ping().Result()
+	if err == nil {
+		fmt.Println(pong)
+		fmt.Println("Successfully cinnected to redis!")
+	}
+	defer client.Close()
+
 	fmt.Println("Starting Authentication Service")
 	r := gin.Default()
 
@@ -15,19 +30,12 @@ func main() {
 		c.String(http.StatusOK, "Welcome to go authentication service")
 	})
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "ok",
-			"message": "pong",
-		})
-	})
+	// test
+	r.POST("/test", handlers.TestPostHandler())
 
-	r.GET("/pong", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "ok",
-			"message": "ping",
-		})
-	})
+	// login
+	// the user should solve the challenge at this time
+	r.POST("/login", handlers.LoginHandler(client))
 	// listening at port 8080
 	r.Run()
 }
