@@ -19,7 +19,7 @@ func main() {
 	pong, err := client.Ping().Result()
 	if err == nil {
 		fmt.Println(pong)
-		fmt.Println("Successfully cinnected to redis!")
+		fmt.Println("Successfully connected to redis!")
 	}
 	defer client.Close()
 
