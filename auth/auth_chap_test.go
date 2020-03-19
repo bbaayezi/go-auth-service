@@ -55,10 +55,11 @@ func TestChallenge(t *testing.T) {
 		res := h.Sum(nil)
 		resStr := string(res)
 		t.Log("Correct response: ", resStr, "\n")
-		t.Log("Encoded md5 string: ", fmt.Sprintf("%x", res))
+		encodeStr := fmt.Sprintf("%x", res)
+		t.Log("Encoded md5 string: ", encodeStr)
 		// compare result
-		if result := c.Validate(secret, resStr); result != true {
-			t.Errorf("Validation test failed. challenge string: %v, accpeted response: %v", c.ChallengeString, resStr)
+		if result := c.Validate(secret, encodeStr); result != true {
+			t.Errorf("Validation test failed. challenge string: %v, accpeted response: %v", c.ChallengeString, encodeStr)
 		}
 	})
 }
