@@ -17,7 +17,7 @@ jobs:
     #### expecting it in the form of
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /home/robin/code/project/go-auth-service
+    working_directory: ~/code/project/go-auth-service
     steps:
       - checkout
       # restoring modules
