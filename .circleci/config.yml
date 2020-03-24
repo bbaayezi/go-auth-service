@@ -17,7 +17,7 @@ jobs:
     #### expecting it in the form of
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: ~/code/project/go-auth-service
+    working_directory: ~/code/project/go-auth-service/backend
     steps:
       - checkout
       # restoring modules
@@ -35,6 +35,6 @@ jobs:
           key: go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
-      
+
       # testing
       - run: go test -v ./...
