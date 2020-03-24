@@ -21,9 +21,9 @@ jobs:
     steps:
       - checkout
       # restoring modules
-      - restore_cache:
-          keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
+      # - restore_cache:
+      #     keys:
+      #       - go-mod-v1-{{ checksum "go.sum" }}
 
       # specify any bash command here prefixed with `run: `
       # - run: go get -v -t -d ./...
@@ -31,10 +31,10 @@ jobs:
       - run: go mod tidy
 
       # caching modules
-      - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
+      # - save_cache:
+      #     key: go-mod-v1-{{ checksum "go.sum" }}
+      #     paths:
+      #       - "/go/pkg/mod"
 
       # testing
       - run: go test -v ./...
