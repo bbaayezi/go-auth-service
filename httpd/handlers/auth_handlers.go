@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"go-auth-service/auth"
+	"go-auth-service/entity"
 	"net/http"
 	"time"
 
@@ -13,17 +14,18 @@ import (
 
 var (
 	password = "abc123"
+	TestUser = entity.User{
+		ID:       1,
+		Username: "test",
+		Password: "Aabc123",
+		Salt:     "kYCDtaYS",
+	}
 )
-
-type Login struct {
-	User     string `json:"user" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
 
 func TestPostHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// bind posted data
-		var login Login
+		var login entity.Login
 		c.BindJSON(&login)
 		c.JSON(http.StatusOK, gin.H{
 			"message": "get posted data",
@@ -36,7 +38,7 @@ func LoginHandler(redisClient *redis.Client) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 		// bind posted data
-		var login Login
+		var login entity.Login
 		c.BindJSON(&login)
 
 		// check the request header
