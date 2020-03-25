@@ -21,3 +21,5 @@ func Salting(text string) (result string, salt string) {
 	// return the result
 	return hashText, s
 }
+
+func AuthPAP()
