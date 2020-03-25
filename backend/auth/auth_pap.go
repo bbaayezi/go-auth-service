@@ -3,6 +3,7 @@ package auth
 import (
 	"crypto/md5"
 	"fmt"
+	"go-auth-service/entity"
 	"go-auth-service/util"
 	"io"
 )
@@ -22,4 +23,6 @@ func Salting(text string) (result string, salt string) {
 	return hashText, s
 }
 
-func AuthPAP()
+func PasswordAuth(user entity.User) bool {
+	return false
+}
